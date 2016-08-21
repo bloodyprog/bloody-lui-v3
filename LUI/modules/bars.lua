@@ -1495,7 +1495,7 @@ module.defaults = {
 			ShowEquipped = false
 		},
 		TopTexture = {
-			Enable = true,
+			Enable = false,
 			Alpha = 0.7,
 			X = 0,
 			Y = 60,

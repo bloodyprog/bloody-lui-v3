@@ -1,9 +1,21 @@
 ------------------------------------------------------------------------
-r773 | chaoslux | 2016-08-09 10:09:40 +0000 (Tue, 09 Aug 2016) | 1 line
+r776 | chaoslux | 2016-08-09 23:29:10 +0000 (Tue, 09 Aug 2016) | 1 line
 Changed paths:
-   A /tags/v3.9.9-773 (from /trunk:772)
+   A /tags/v3.9.9a-776 (from /trunk:775)
 
-Tagging as v3.9.9-773
+Tagging as v3.9.9a-776
+------------------------------------------------------------------------
+r775 | chaoslux | 2016-08-09 23:25:52 +0000 (Tue, 09 Aug 2016) | 1 line
+Changed paths:
+   M /trunk/LUI.toc
+
+- Emergency update to fix broken install
+------------------------------------------------------------------------
+r774 | chaoslux | 2016-08-09 23:22:17 +0000 (Tue, 09 Aug 2016) | 1 line
+Changed paths:
+   M /trunk/addons/recount.lua
+
+- Fixed Install not working with Recount installed.
 ------------------------------------------------------------------------
 r772 | chaoslux | 2016-08-09 09:41:53 +0000 (Tue, 09 Aug 2016) | 1 line
 Changed paths:

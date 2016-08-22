@@ -37,6 +37,7 @@ module.setter = "generic"
 
 function module:LoadOptions()
 	local options = {
+		Reset = self:NewExecute("Restore Default", "Restores Default Settings.", 0, function() module.db:ResetProfile(); toggleArt() end),
 		Title = self:NewHeader("Art Work", 1),
 		UpperArt = self:NewGroup("Upper Art", 2, true, {
 			--Orb = self:NewToggle("Disable the Orb", "", 1, toggleArt, nil, true),

@@ -345,13 +345,13 @@ module.defaults = {
 		Enable = true,
 		General = {
 			Width = 384,
-			Height = 10,
+			Height = 4,
 			X = 0,
-			Y = 6,
+			Y = 10,
 			Point = "BOTTOM",
 			TankHide = true,
-			expMode = false,
-			showRested = false,
+			expMode = true,
+			showRested = true,
 			artifact = true,
 		},
 		Appearance = {
@@ -394,6 +394,7 @@ function module:LoadOptions()
 	local dryCall = function() self:Refresh() end
 	
 	local options = {
+		Reset = self:NewExecute("Restore Default", "Restores Default Settings.", 0, function() module.db:ResetProfile(); self:Refresh() end),
 		General = self:NewGroup("General", 1, {
 			header = self:NewHeader("General Options", 0),
 			[""] = self:NewPosSliders("Threat Bar", 1, nil, "LUIThreat", true),

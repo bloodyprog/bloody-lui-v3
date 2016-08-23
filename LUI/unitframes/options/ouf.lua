@@ -14,10 +14,10 @@ local oUF = LUI.oUF
 local Blizzard = LUI.Blizzard
 
 module.defaults.profile.Settings = {
-	ShowV2Textures = true,
-	ShowV2PartyTextures = true,
-	ShowV2ArenaTextures = true,
-	ShowV2BossTextures = true,
+	ShowV2Textures = false,
+	ShowV2PartyTextures = false,
+	ShowV2ArenaTextures = false,
+	ShowV2BossTextures = false,
 	Castbars = true,
 	HideBlizzRaid = false,
 	AuratimerFont = "Prototype",

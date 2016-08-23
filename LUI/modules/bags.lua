@@ -1207,7 +1207,7 @@ end
 --       It would break the CopyBags function that dynamically copy things.
 module.defaults = {
 	profile = {
-		Enable = true,
+		Enable = false,
 		CopyBags = true,
 		Lock = false,
 		hideSort = false,

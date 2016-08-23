@@ -8,7 +8,7 @@ local addonname, LUI = ...
 local module = LUI:Module("Unitframes")
 
 module.defaults.profile.ToT = {
-	Enable = true,
+	Enable = false,
 	Height = 24,
 	Width = 200,
 	X = 435,

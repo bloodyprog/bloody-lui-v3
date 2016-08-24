@@ -163,7 +163,7 @@ module.defaults.profile.Raid = {
 			Point = "TOPLEFT",
 		},
 		Role = {
-			Enable = false,
+			Enable = true,
 			Size = 14,
 			X = 2,
 			Y = 2,

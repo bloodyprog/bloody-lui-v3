@@ -8,7 +8,7 @@ local addonname, LUI = ...
 local module = LUI:Module("Unitframes")
 
 module.defaults.profile.Party = {
-	Enable = true,
+	Enable = false,
 	UseBlizzard = false,
 	Height = 43,
 	Width = 170,

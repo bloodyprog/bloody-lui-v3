@@ -657,6 +657,7 @@ function module:LoadOptions()
 	end
 
 	local options = {
+		Reset = self:NewExecute("Restore Default", "Restores Default Settings.", 0, function() module.db:ResetProfile(); self:Refresh() end),
 		Buffs = CreateAuraOptions(L["Buffs"], 1),
 		Debuffs = CreateAuraOptions(L["Debuffs"], 2),
 	}

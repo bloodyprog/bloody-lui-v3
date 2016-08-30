@@ -558,9 +558,9 @@ end
 module.defaults = {
 	profile = {
 		Buffs = {
-			Anchor = "TOPLEFT",
-			X = 30,
-			Y = -35,
+			Anchor = "TOPRIGHT",
+			X = -200,
+			Y = -75,
 			Size = 35,
 			AurasPerRow = 16,
 			NumRows = 2,
@@ -583,9 +583,9 @@ module.defaults = {
 			},
 		},
 		Debuffs = {
-			Anchor = "TOPLEFT",
-			X = 30,
-			Y = -160,
+			Anchor = "TOPRIGHT",
+			X = -200,
+			Y = -200,
 			Size = 35,
 			AurasPerRow = 16,
 			NumRows = 1,

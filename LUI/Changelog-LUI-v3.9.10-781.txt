@@ -1,9 +1,15 @@
 ------------------------------------------------------------------------
-r779 | chaoslux | 2016-08-30 07:34:41 +0000 (Tue, 30 Aug 2016) | 1 line
+r781 | chaoslux | 2016-08-30 17:24:28 +0000 (Tue, 30 Aug 2016) | 1 line
 Changed paths:
-   A /tags/v3.9.10-779 (from /trunk:778)
+   A /tags/v3.9.10-781 (from /trunk:780)
 
-Tagging as v3.9.10-779
+Tagging as v3.9.10-781
+------------------------------------------------------------------------
+r780 | chaoslux | 2016-08-30 17:20:06 +0000 (Tue, 30 Aug 2016) | 1 line
+Changed paths:
+   M /trunk/unitframes/plugins/oUF_CombatFeedback.lua
+
+- Remove invisible non-breaking space that is causing WoW to go crazy. 
 ------------------------------------------------------------------------
 r778 | chaoslux | 2016-08-30 06:41:55 +0000 (Tue, 30 Aug 2016) | 3 lines
 Changed paths:

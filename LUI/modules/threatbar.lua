@@ -351,7 +351,7 @@ module.defaults = {
 			Point = "BOTTOM",
 			TankHide = true,
 			expMode = true,
-			showRested = true,
+			showRested = false,
 			artifact = true,
 		},
 		Appearance = {
@@ -370,7 +370,7 @@ module.defaults = {
 			X = 0,
 			Y = 0,
 			Font = "Prototype",
-			Size = 14,
+			Size = 10,
 			Outline = "NONE",
 			Color = "Individual",
 			IndividualColor = {

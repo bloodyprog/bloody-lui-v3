@@ -724,14 +724,14 @@ module.defaults = {
 						end
 					end
 				end)(),
-				Size = 14,
+				Size = 12,
 				Flag = "NONE",
 			},
 			ShortChannelNames = true,
 			DisableFading = true,
 			MinimalistTabs = true,
 			LinkHover = true,
-			BackgroundColor = {0, 0, 0, 0.4},
+			BackgroundColor = {0, 0, 0, 0.0},
 			ShiftMouseScroll = true,
 		},
 	},

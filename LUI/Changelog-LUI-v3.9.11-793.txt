@@ -1,4 +1,29 @@
 ------------------------------------------------------------------------
+r793 | chaoslux | 2016-10-28 09:39:42 +0000 (Fri, 28 Oct 2016) | 1 line
+Changed paths:
+   A /tags/v3.9.11-793 (from /trunk:792)
+
+Tagging as v3.9.11-793
+------------------------------------------------------------------------
+r792 | chaoslux | 2016-10-28 09:35:29 +0000 (Fri, 28 Oct 2016) | 1 line
+Changed paths:
+   M /trunk/LUI.toc
+
+- Version Bump to 3.9.11
+------------------------------------------------------------------------
+r791 | chaoslux | 2016-10-28 09:33:10 +0000 (Fri, 28 Oct 2016) | 2 lines
+Changed paths:
+   M /trunk/modules/raidmenu.lua
+
+- RaidMenu: Added X Offset for anyone that wants to move the frame horizontally.
+- RaidMenu: The button no longer works while in combat (it just threw an error anyway)
+------------------------------------------------------------------------
+r790 | chaoslux | 2016-10-27 06:18:27 +0000 (Thu, 27 Oct 2016) | 1 line
+Changed paths:
+   M /trunk/modules/tooltip.lua
+
+- Tooltip: Fixed another GetAttribute issue. 
+------------------------------------------------------------------------
 r789 | chaoslux | 2016-10-26 22:10:59 +0000 (Wed, 26 Oct 2016) | 2 lines
 Changed paths:
    A /trunk/addons/recount.lua

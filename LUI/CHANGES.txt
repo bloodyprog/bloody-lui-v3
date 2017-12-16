@@ -1,4 +1,30 @@
 ------------------------------------------------------------------------
+r830 | Chaoslux | 2017-10-02 04:02:15 -0500 (Mon, 02 Oct 2017) | 3 lines
+Changed paths:
+   M /trunk/LUI.lua
+   M /trunk/LUI.toc
+   M /trunk/addons/bartender.lua
+   M /trunk/addons/details.lua
+   M /trunk/addons/grid.lua
+   M /trunk/addons/omen.lua
+   M /trunk/addons/pallypower.lua
+   M /trunk/addons/recount.lua
+   M /trunk/debug.lua
+   M /trunk/devapi.lua
+   M /trunk/scripts/autoinvite.lua
+   M /trunk/scripts/blizzoptionsmover.lua
+   M /trunk/scripts/blizzscale.lua
+   D /trunk/scripts/bugcatcher.lua
+   M /trunk/scripts/colourpicker.lua
+   M /trunk/scripts/errorhider.lua
+   M /trunk/scripts/frameidentifier.lua
+   M /trunk/scripts/partyfix.lua
+   M /trunk/scripts/talentspam.lua
+
+- Bumping version to remove a print that shouldn't be there.
+- Bunch of file endings again.
+- Removed a dead file.
+------------------------------------------------------------------------
 r829 | Chaoslux | 2017-08-30 04:37:35 -0500 (Wed, 30 Aug 2017) | 1 line
 Changed paths:
    M /trunk/LUI.lua

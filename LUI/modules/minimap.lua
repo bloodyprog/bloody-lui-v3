@@ -4,23 +4,23 @@
 	Description: Minimap Module
 	Version....: 1.1
 	Rev Date...: 02/01/2011
-	
+
 	Edits:
 		v1.0: Loui
 		v1.1: Zista
 		v1.2: Darkruler
 		v1.2b: Thaly
-]] 
+]]
 
 -- External references.
-local addonname, LUI = ...
+local _, LUI = ...
 local module = LUI:Module("Minimap", "AceHook-3.0")
 local Themes = LUI:Module("Themes")
 local Media = LibStub("LibSharedMedia-3.0")
 local widgetLists = AceGUIWidgetLSMlists
 
 local db
-local hooks = { }
+local hooks_ = { }
 local shouldntSetPoint = false
 local numHookedCaptureFrames = 0
 local fontflags = {'OUTLINE', 'THICKOUTLINE', 'MONOCHROME', 'NONE'}
@@ -30,9 +30,9 @@ function module:SetAdditionalFrames()
 	self:SecureHook(DurabilityFrame, "SetPoint", "DurabilityFrame_SetPoint")
 	self:SecureHook(VehicleSeatIndicator, "SetPoint", "VehicleSeatIndicator_SetPoint")
 	self:SecureHook(ObjectiveTrackerFrame, "SetPoint", "ObjectiveTrackerFrame_SetPoint")
-	self:SecureHook(WorldStateAlwaysUpFrame, "SetPoint", "WorldStateAlwaysUpFrame_SetPoint")
+	--self:SecureHook(WorldStateAlwaysUpFrame, "SetPoint", "WorldStateAlwaysUpFrame_SetPoint")
 	self:SecureHook(TicketStatusFrame, "SetPoint", "TicketStatusFrame_SetPoint")
-	self:SecureHook("WorldStateAlwaysUpFrame_Update")
+	--self:SecureHook("WorldStateAlwaysUpFrame_Update")
 end
 
 function module:SetPosition(frame)
@@ -51,13 +51,13 @@ function module:SetPosition(frame)
 	elseif frame == "ticketStatus" and db.Minimap.Frames.SetTicket then
 		TicketStatusFrame:ClearAllPoints()
 		TicketStatusFrame:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", db.Minimap.Frames.TicketX, db.Minimap.Frames.TicketY)
-	elseif frame == "capture" and db.Minimap.Frames.SetCapture then
+	--[[elseif frame == "capture" and db.Minimap.Frames.SetCapture then
 		for i = 1, NUM_EXTENDED_UI_FRAMES do
 			_G["WorldStateCaptureBar" .. i]:ClearAllPoints()
 			_G["WorldStateCaptureBar" .. i]:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", db.Minimap.Frames.CaptureX, db.Minimap.Frames.CaptureY)
-		end
+		end]]
 	end
-	
+
 	shouldntSetPoint = false
 end
 
@@ -78,7 +78,7 @@ end
 
 function module:WorldStateAlwaysUpFrame_SetPoint()
 	if shouldntSetPoint then return end
-	self:SetPosition('worldState')
+	--self:SetPosition('worldState')
 end
 
 function module:WorldStateCaptureBar_SetPoint()
@@ -102,7 +102,7 @@ end
 
 function module:SetColors()
 	local minimap_r, minimap_g, minimap_b, minimap_a = unpack(Themes.db.profile.minimap)
-	
+
 	fminimap_texture1:SetBackdropBorderColor(minimap_r,minimap_g,minimap_b,minimap_a)
 	fminimap_texture3:SetBackdropBorderColor(minimap_r,minimap_g,minimap_b,minimap_a)
 	fminimap_texture5:SetBackdropBorderColor(minimap_r,minimap_g,minimap_b,minimap_a)
@@ -112,7 +112,7 @@ end
 function module:SetMinimapFrames()
 	local glowTex = LUI.Media.glowTex
 	local minimap_r, minimap_g, minimap_b, minimap_a = unpack(Themes.db.profile.minimap)
-	
+
 	local fminimap_border = LUI:CreateMeAFrame("FRAME","fminimap_border",Minimap,143,143,1,"BACKGROUND",2,"CENTER",Minimap,"CENTER",0,0,1)
 	fminimap_border:SetBackdrop({bgFile="Interface\\Tooltips\\UI-Tooltip-Background", edgeFile=glowTex, tile=0, tileSize=0, edgeSize=7, insets={left=0, right=0, top=0, bottom=0}})
 	fminimap_border:SetBackdropColor(color_r,color_g,color_b,0)
@@ -127,7 +127,7 @@ function module:SetMinimapFrames()
 	fminimap_texture2:SetBackdrop({bgFile="Interface\\Tooltips\\UI-Tooltip-Background", edgeFile=glowTex, tile=0, tileSize=0, edgeSize=6, insets={left=3, right=3, top=3, bottom=3}})
 	fminimap_texture2:SetBackdropColor(color_r,color_g,color_b,0)
 	fminimap_texture2:SetBackdropBorderColor(0,0,0,1)
-	
+
 	local fminimap_texture3 = LUI:CreateMeAFrame("FRAME","fminimap_texture3",Minimap,50,50,1,"BACKGROUND",1,"BOTTOMRIGHT",Minimap,"BOTTOMRIGHT",7,-7,1)
 	fminimap_texture3:SetBackdrop({bgFile="Interface\\Tooltips\\UI-Tooltip-Background", edgeFile=glowTex, tile=0, tileSize=0, edgeSize=4, insets={left=3, right=3, top=3, bottom=3}})
 	fminimap_texture3:SetBackdropColor(minimap_r,minimap_g,minimap_b,0)
@@ -137,7 +137,7 @@ function module:SetMinimapFrames()
 	fminimap_texture4:SetBackdrop({bgFile="Interface\\Tooltips\\UI-Tooltip-Background", edgeFile=glowTex, tile=0, tileSize=0, edgeSize=6, insets={left=3, right=3, top=3, bottom=3}})
 	fminimap_texture4:SetBackdropColor(color_r,color_g,color_b,0)
 	fminimap_texture4:SetBackdropBorderColor(0,0,0,1)
-	
+
 	local fminimap_texture5 = LUI:CreateMeAFrame("FRAME","fminimap_texture5",Minimap,50,50,1,"BACKGROUND",1,"TOPRIGHT",Minimap,"TOPRIGHT",7,7,1)
 	fminimap_texture5:SetBackdrop({bgFile="Interface\\Tooltips\\UI-Tooltip-Background", edgeFile=glowTex, tile=0, tileSize=0, edgeSize=4, insets={left=3, right=3, top=3, bottom=3}})
 	fminimap_texture5:SetBackdropColor(minimap_r,minimap_g,minimap_b,0)
@@ -157,7 +157,7 @@ function module:SetMinimapFrames()
 	fminimap_texture8:SetBackdrop({bgFile="Interface\\Tooltips\\UI-Tooltip-Background", edgeFile=glowTex, tile=0, tileSize=0, edgeSize=6, insets={left=3, right=3, top=3, bottom=3}})
 	fminimap_texture8:SetBackdropColor(color_r,color_g,color_b,0)
 	fminimap_texture8:SetBackdropBorderColor(0,0,0,1)
-	
+
 	for i=1, 8, 1 do
 		if _G["fminimap_texture"..i] ~= nil then
 			if db.Minimap.General.ShowTextures == true then
@@ -167,13 +167,13 @@ function module:SetMinimapFrames()
 			end
 		end
 	end
-	
+
 	local minimaptimerout, minimaptimerin = 0,0
 	local minimap_timer = 0.3
-	
+
 	local MinimapAlphaIn = CreateFrame( "Frame", "MinimapAlphaIn", UIParent)
 	MinimapAlphaIn:Hide()
-	MinimapAlphaIn:SetScript("OnUpdate", function(self,elapsed)
+	MinimapAlphaIn:SetScript("OnUpdate", function(_,elapsed)
 		minimaptimerin = minimaptimerin + elapsed
 		Minimap:Show()
 		if minimaptimerin < minimap_timer then
@@ -185,10 +185,10 @@ function module:SetMinimapFrames()
 			self:Hide()
 		end
 	end)
-	
+
 	local MinimapAlphaOut = CreateFrame( "Frame", "MinimapAlphaOut", UIParent)
 	MinimapAlphaOut:Hide()
-	MinimapAlphaOut:SetScript("OnUpdate", function(self,elapsed)
+	MinimapAlphaOut:SetScript("OnUpdate", function(_,elapsed)
 		minimaptimerout = minimaptimerout + elapsed
 		if minimaptimerout < minimap_timer then
 			local alpha = 1 - minimaptimerout / minimap_timer
@@ -229,7 +229,7 @@ function module:SetMinimap()
 	self:SetPosition('worldState')
 	self:SetPosition('capture')
 	self:SetPosition('ticketStatus')
-	
+
 	local FONT = Media:Fetch("font", db.Minimap.Font.Font)
 
 	--------------------------------------------------------------------
@@ -243,23 +243,23 @@ function module:SetMinimap()
 	-- Hide Zoom Buttons
 	MinimapZoomIn:Hide()
 	MinimapZoomOut:Hide()
-		
+
 	-- GuildInstanceDifficulty
 	GuildInstanceDifficulty:UnregisterAllEvents()
 	GuildInstanceDifficulty.NewShow = MiniMapInstanceDifficulty.Show
 	GuildInstanceDifficulty.Show = GuildInstanceDifficulty.Hide
 	GuildInstanceDifficulty:Hide()
-	
+
 	MiniMapInstanceDifficulty.NewShow = MiniMapInstanceDifficulty.Show
 	MiniMapInstanceDifficulty.Show = MiniMapInstanceDifficulty.Hide
 	MiniMapInstanceDifficulty:Hide()
-	
+
 	-- Hide Voice Chat Frame
-	MiniMapVoiceChatFrame:Hide()
+	--MiniMapVoiceChatFrame:Hide()
 
 	-- Hide North texture at top
 	MinimapNorthTag:SetTexture(nil)
-	
+
 	-- Hide Zone Frame
 	MinimapZoneTextButton:Hide()
 
@@ -267,7 +267,7 @@ function module:SetMinimap()
 	TimeManagerClockButton:Hide()
 	LUI:Kill(TimeManagerClockButton)
 
-	-- Hide Tracking Button 
+	-- Hide Tracking Button
 	MiniMapTracking:Hide()
 
 	-- Hide Calendar Button
@@ -278,67 +278,67 @@ function module:SetMinimap()
 	MiniMapMailFrame:SetPoint(db.Minimap.Icon.Mail, Minimap, LUI:Scale(3), LUI:Scale(6))
 	MiniMapMailBorder:Hide()
 	MiniMapMailIcon:SetTexture(LUI.Media.mail)
-	
+
 	-- Move battleground icon
 	QueueStatusMinimapButton:ClearAllPoints()
 	QueueStatusMinimapButton:SetPoint(db.Minimap.Icon.BG, Minimap, LUI:Scale(3), 0)
 	QueueStatusMinimapButtonBorder:Hide()
-	
+
 	-- Move Garrison icon
 	GarrisonLandingPageMinimapButton:ClearAllPoints();
 	GarrisonLandingPageMinimapButton:SetSize(32,32);
 	GarrisonLandingPageMinimapButton:SetPoint(db.Minimap.Icon.Mail, Minimap, LUI:Scale(3), LUI:Scale(12))
-	
-	MiniMapMailFrame:HookScript("OnShow", function(self)
+
+	MiniMapMailFrame:HookScript("OnShow", function(_)
 		GarrisonLandingPageMinimapButton:SetPoint("BOTTOMLEFT", MiniMapMailFrame, "TOPLEFT", 0, LUI:Scale(-4))
 	end)
-	MiniMapMailFrame:HookScript("OnHide", function(self)
+	MiniMapMailFrame:HookScript("OnHide", function(_)
 		GarrisonLandingPageMinimapButton:SetPoint(db.Minimap.Icon.Mail, Minimap, LUI:Scale(3), LUI:Scale(12))
 	end)
-	
+
 	-- Move GM Ticket Status icon
 	HelpOpenTicketButton:SetParent(Minimap)
 	HelpOpenTicketButton:ClearAllPoints()
 	HelpOpenTicketButton:SetPoint(db.Minimap.Icon.GMTicket, Minimap, LUI:Scale(3), LUI:Scale(3))
-	
+
 	local micro_r, micro_g, micro_b = unpack(Themes.db.profile.micromenu)
 	HelpOpenTicketButtonTutorial:ClearAllPoints()
 	HelpOpenTicketButtonTutorial:SetPoint("TOP", HelpOpenTicketButton, "BOTTOM", 0, -HelpOpenTicketButtonTutorialArrow:GetHeight())
-	
+
 	HelpOpenTicketButtonTutorialBg:SetGradientAlpha("VERTICAL", micro_r/4, micro_g/4, micro_b/4, 1, 0, 0, 0, 1)
-	
+
 	HelpOpenTicketButtonTutorialText:SetFont(Media:Fetch("font", "vibrocen"), 14, "NONE")
-	
+
 	HelpOpenTicketButtonTutorialArrow:ClearAllPoints()
 	HelpOpenTicketButtonTutorialArrow:SetPoint("BOTTOM", HelpOpenTicketButtonTutorial, "TOP", 0, -6)
-	
+
 	HelpOpenTicketButtonTutorialGlow:SetTexCoord(0.40625000, 0.66015625, 0.82812500, 0.77343750)
 	HelpOpenTicketButtonTutorialGlow:SetVertexColor(r, g, b, 0.5)
 	HelpOpenTicketButtonTutorialGlow:ClearAllPoints()
 	HelpOpenTicketButtonTutorialGlow:SetPoint("BOTTOM", HelpOpenTicketButtonTutorialArrow, "BOTTOM", 0, 0)
-	
+
 	HelpOpenTicketButtonTutorialArrow:SetTexCoord(0.78515625, 0.99218750, 0.58789063, 0.54687500)
 	HelpOpenTicketButtonTutorialArrow:SetVertexColor(micro_r, micro_g, micro_b)
-	
+
 	HelpOpenTicketButtonTutorialGlowTopLeft:SetVertexColor(micro_r, micro_g, micro_b)
 	HelpOpenTicketButtonTutorialGlowTopRight:SetVertexColor(micro_r, micro_g, micro_b)
 	HelpOpenTicketButtonTutorialGlowBottomLeft:SetVertexColor(micro_r, micro_g, micro_b)
 	HelpOpenTicketButtonTutorialGlowBottomRight:SetVertexColor(micro_r, micro_g, micro_b)
-	
+
 	HelpOpenTicketButtonTutorialGlowTop:SetVertexColor(micro_r, micro_g, micro_b)
 	HelpOpenTicketButtonTutorialGlowBottom:SetVertexColor(micro_r, micro_g, micro_b)
 	HelpOpenTicketButtonTutorialGlowLeft:SetVertexColor(micro_r, micro_g, micro_b)
 	HelpOpenTicketButtonTutorialGlowRight:SetVertexColor(micro_r, micro_g, micro_b)
-	
+
 	-- greyscaled textures
 	HelpOpenTicketButtonTutorialGlow:SetTexture("Interface\\AddOns\\LUI\\media\\TalentFrame-Parts")
 	HelpOpenTicketButtonTutorialArrow:SetTexture("Interface\\AddOns\\LUI\\media\\TalentFrame-Parts")
-	
+
 	HelpOpenTicketButtonTutorialGlowTopLeft:SetTexture("Interface\\AddOns\\LUI\\media\\TalentFrame-Parts")
 	HelpOpenTicketButtonTutorialGlowTopRight:SetTexture("Interface\\AddOns\\LUI\\media\\TalentFrame-Parts")
 	HelpOpenTicketButtonTutorialGlowBottomLeft:SetTexture("Interface\\AddOns\\LUI\\media\\TalentFrame-Parts")
 	HelpOpenTicketButtonTutorialGlowBottomRight:SetTexture("Interface\\AddOns\\LUI\\media\\TalentFrame-Parts")
-	
+
 	HelpOpenTicketButtonTutorialGlowTop:SetTexture("Interface\\AddOns\\LUI\\media\\TALENTFRAME-HORIZONTAL2")
 	HelpOpenTicketButtonTutorialGlowBottom:SetTexture("Interface\\AddOns\\LUI\\media\\TALENTFRAME-HORIZONTAL2")
 	HelpOpenTicketButtonTutorialGlowLeft:SetTexture("Interface\\AddOns\\LUI\\media\\TALENTFRAME-VERTICAL2")
@@ -361,7 +361,7 @@ function module:SetMinimap()
 
 	-- Enable mouse scrolling
 	Minimap:EnableMouseWheel(true)
-	Minimap:SetScript("OnMouseWheel", function(self, d)
+	Minimap:SetScript("OnMouseWheel", function(_, d)
 		if IsShiftKeyDown() then
 			db.Minimap.General.Size = db.Minimap.General.Size + ((d > 0 and 0.25) or (d < 0 and -0.25) or 0)
 			if db.Minimap.General.Size > 2.5 then
@@ -369,7 +369,7 @@ function module:SetMinimap()
 			elseif db.Minimap.General.Size < 0.5 then
 				db.Minimap.General.Size = 0.5
 			end
-			
+
 			module:SetMinimapSize()
 		else
 			if d > 0 then
@@ -435,9 +435,9 @@ function module:SetMinimap()
 
 	-- reskin LFG dropdown
 	--[[LFDSearchStatus:SetBackdrop({
-	  bgFile = LUI.Media.blank, 
-	  edgeFile = LUI.Media.blank, 
-	  tile = false, tileSize = 0, edgeSize = mult, 
+	  bgFile = LUI.Media.blank,
+	  edgeFile = LUI.Media.blank,
+	  tile = false, tileSize = 0, edgeSize = mult,
 	  insets = { left = 0, right = 0, top = 0, bottom = 0}
 	})]]
 	QueueStatusFrame:SetBackdropColor(.1,.1,.1,1)
@@ -446,7 +446,7 @@ function module:SetMinimap()
 	----------------------------------------------------------------------------------------
 	-- Animation Coords and Current Zone. Awesome feature by AlleyKat.
 	----------------------------------------------------------------------------------------
-	 
+
 	--Style Zone and Coord panels
 	local m_zone = CreateFrame( "Frame","m_zone",Minimap)
 	LUI:CreatePanel(m_zone, 0, 20, "TOPLEFT", Minimap, "TOPLEFT",LUI:Scale(2),LUI:Scale(-2))
@@ -454,7 +454,7 @@ function module:SetMinimap()
 	m_zone:SetFrameStrata("LOW")
 	m_zone:SetPoint("TOPRIGHT",Minimap,-2,-2)
 	m_zone:Hide()
-	
+
 	local m_zone_text = m_zone:CreateFontString("m_zone_text","Overlay")
 	m_zone_text:SetFont(FONT,db.Minimap.Font.FontSize,db.Minimap.Font.FontFlag)
 	m_zone_text:SetPoint("Center",0,0)
@@ -474,16 +474,17 @@ function module:SetMinimap()
 	m_coord_text:SetJustifyH("CENTER")
 	m_coord_text:SetJustifyV("MIDDLE")
 	m_coord_text:SetText("00,00")
-	
+
 	if db.Minimap.General.AlwaysShowText then
 		m_zone:Show()
 		if db.Minimap.General.ShowCoord then
 			m_coord:Show()
 		end
 	end
-	
-	m_coord:SetScript("OnUpdate", function(self)
-		local x,y = GetPlayerMapPosition("player")
+
+	m_coord:SetScript("OnUpdate", function(_)
+		--local x,y = GetPlayerMapPosition("player")
+		local x, y = C_Map.GetPlayerMapPosition( C_Map.GetBestMapForUnit("player"), "player" ):GetXY()
 		if not x then
 			m_coord_text:SetText("")
 		else
@@ -492,8 +493,8 @@ function module:SetMinimap()
 			m_coord_text:SetFormattedText("%.2d, %.2d", x, y)
 		end
 	end)
-	
-	m_zone:SetScript("OnUpdate", function(self)
+
+	m_zone:SetScript("OnUpdate", function(_)
 		local pvp = GetZonePVPInfo()
 		m_zone_text:SetText(GetMinimapZoneText())
 		if pvp == "friendly" then
@@ -508,7 +509,7 @@ function module:SetMinimap()
 			m_zone_text:SetTextColor(1.0, 1.0, 1.0)
 		end
 	end)
-	
+
 	-- Set Scripts and etc.
 	Minimap:SetScript("OnEnter",function()
 		m_zone:Show()
@@ -516,7 +517,7 @@ function module:SetMinimap()
 			m_coord:Show()
 		end
 	end)
-	 
+
 	Minimap:SetScript("OnLeave",function()
 		if not db.Minimap.General.AlwaysShowText then
 			m_zone:Hide()
@@ -526,19 +527,19 @@ function module:SetMinimap()
 
 	Minimap:RegisterForDrag('LeftButton')
 	Minimap:SetMovable(true)
-	Minimap:SetScript('OnDragStop', function() if(db.Minimap.General.Position.UnLocked) then 
+	Minimap:SetScript('OnDragStop', function() if(db.Minimap.General.Position.UnLocked) then
 			Minimap:StopMovingOrSizing()
 			self:GetMinimapPosition()
-		end 
+		end
 	end)
 	Minimap:SetScript('OnDragStart', function() if(db.Minimap.General.Position.UnLocked) then Minimap:StartMoving() end end)
 	MinimapCluster:EnableMouse(false)
-	
+
 end
 
 function module:GetMinimapPosition()
 
-	local point, relativeTo, relativePoint, xOfs, yOfs = Minimap:GetPoint()
+	local point, _, relativePoint, xOfs, yOfs = Minimap:GetPoint()
 	db.Minimap.General.Position.RelativePoint = relativePoint
 	db.Minimap.General.Position.Point = point
 	db.Minimap.General.Position.X = xOfs
@@ -586,7 +587,7 @@ local defaults = {
 			CaptureY = "-205",
 			TicketX = "-175",
 			TicketY = "-70",
-			SetAlwaysUpFrame = true,
+			SetAlwaysUpFrame = false,
 			SetVehicleSeatIndicator = true,
 			SetDurabilityFrame = true,
 			SetObjectiveTrackerFrame = true,
@@ -605,7 +606,7 @@ function module:LoadOptions()
 			type = "group",
 			disabled = function() return not db.Minimap.Enable end,
 			childGroups = "tab",
-			args = {		
+			args = {
 				MinimapSettings = {
 					name = "Minimap",
 					type = "group",
@@ -624,7 +625,7 @@ function module:LoadOptions()
 									type = "toggle",
 									width = "full",
 									get = function() return db.Minimap.General.ShowTextures end,
-									set = function(self, ShowTextures)
+									set = function(_, ShowTextures)
 												db.Minimap.General.ShowTextures = not db.Minimap.General.ShowTextures
 												for i=1, 8, 1 do
 													if _G["fminimap_texture"..i] ~= nil then
@@ -645,7 +646,7 @@ function module:LoadOptions()
 									type = "toggle",
 									width = "full",
 									get = function() return db.Minimap.General.ShowBorder end,
-									set = function(self, ShowBorder)
+									set = function(_, ShowBorder)
 												db.Minimap.General.ShowBorder = not db.Minimap.General.ShowBorder
 												if fminimap_border ~= nil then
 													if db.Minimap.General.ShowBorder == true then
@@ -664,7 +665,7 @@ function module:LoadOptions()
 									type = "toggle",
 									width = "full",
 									get = function() return db.Minimap.General.AlwaysShowText end,
-									set = function(self)
+									set = function(_)
 										db.Minimap.General.AlwaysShowText = not db.Minimap.General.AlwaysShowText
 										if db.Minimap.General.AlwaysShowText then
 											m_zone:Show()
@@ -685,7 +686,7 @@ function module:LoadOptions()
 									type = "toggle",
 									width = "full",
 									get = function() return db.Minimap.General.ShowCoord end,
-									set = function(self)
+									set = function(_)
 										db.Minimap.General.ShowCoord= not db.Minimap.General.ShowCoord
 										m_coord:Hide()
 										if db.Minimap.General.AlwaysShowText then
@@ -706,7 +707,7 @@ function module:LoadOptions()
 									desc = "X Value for your Minimap.\n\nNote:\nPositive values = right\nNegative values = left\nDefault: "..LUI.defaults.profile.Minimap.General.Position.X,
 									type = "input",
 									get = function() return tostring(db.Minimap.General.Position.X) end,
-									set = function(self,PosX)
+									set = function(_,PosX)
 											if PosX == nil or PosX == "" then
 												PosX = "-24"
 											end
@@ -720,7 +721,7 @@ function module:LoadOptions()
 									desc = "Y Value for your Minimap.\n\nNote:\nPositive values = up\nNegative values = down\nDefault: "..LUI.defaults.profile.Minimap.General.Position.Y,
 									type = "input",
 									get = function() return tostring(db.Minimap.General.Position.Y) end,
-									set = function(self,PosY)
+									set = function(_,PosY)
 											if PosY == nil or PosY == "" then
 												PosY = "-80"
 											end
@@ -743,7 +744,7 @@ function module:LoadOptions()
 									type = "toggle",
 									width = "full",
 									get = function() return not db.Minimap.General.Position.UnLocked end,
-									set = function(self)
+									set = function(_)
 										db.Minimap.General.Position.UnLocked = not db.Minimap.General.Position.UnLocked
 									end,
 									order = 9,
@@ -752,7 +753,7 @@ function module:LoadOptions()
 									name = "Size",
 									type = "header",
 									order = 10,
-								},	
+								},
 								Size = {
 									name = "Size",
 									type = "range",
@@ -763,7 +764,7 @@ function module:LoadOptions()
 									width = "double",
 									desc = "Size for your Minimap.",
 									get = function() return db.Minimap.General.Size end,
-									set = function(self,Size)
+									set = function(_,Size)
 											if Size == nil or Size == "" then
 												Size = LUI.defaults.profile.Minimap.General.Size
 											end
@@ -778,7 +779,7 @@ function module:LoadOptions()
 							name = "Font",
 							type = "group",
 							order = 2,
-							args = {							
+							args = {
 								Font = {
 									name = "Font",
 									desc = "Choose the Font for your Minimap Location and Coords!\n\nDefault: "..LUI.defaults.profile.Minimap.Font.Font,
@@ -787,7 +788,7 @@ function module:LoadOptions()
 									dialogControl = "LSM30_Font",
 									values = widgetLists.font,
 									get = function() return db.Minimap.Font.Font end,
-									set = function(self, Font)
+									set = function(_, Font)
 										db.Minimap.Font.Font = Font
 										m_zone_text:SetFont(Media:Fetch("font", db.Minimap.Font.Font), db.Minimap.Font.FontSize, db.Minimap.Font.FontFlag)
 										m_coord_text:SetFont(Media:Fetch("font", db.Minimap.Font.Font), db.Minimap.Font.FontSize, db.Minimap.Font.FontFlag)
@@ -807,7 +808,7 @@ function module:LoadOptions()
 											end
 										end
 									end,
-									set = function(self, FontFlag)
+									set = function(_, FontFlag)
 										db.Minimap.Font.FontFlag = fontflags[FontFlag]
 										m_zone_text:SetFont(Media:Fetch("font", db.Minimap.Font.Font), db.Minimap.Font.FontSize, db.Minimap.Font.FontFlag)
 										m_coord_text:SetFont(Media:Fetch("font", db.Minimap.Font.Font), db.Minimap.Font.FontSize, db.Minimap.Font.FontFlag)
@@ -830,12 +831,12 @@ function module:LoadOptions()
 										m_coord_text:SetFont(Media:Fetch("font", db.Minimap.Font.Font), db.Minimap.Font.FontSize, db.Minimap.Font.FontFlag)
 									end,
 									order = 3,
-								},							
+								},
 							},
 						},
 					},
 				},
-				MinimapFrames = {				
+				MinimapFrames = {
 					name = "Minimap Frames",
 					type = "group",
 					order = 3,
@@ -876,7 +877,7 @@ function module:LoadOptions()
 									width = "full",
 
 									get = function() return db.Minimap.Frames.SetAlwaysUpFrame end,
-									set = function(self)
+									set = function(_)
 										db.Minimap.Frames.SetAlwaysUpFrame = not db.Minimap.Frames.SetAlwaysUpFrame
 										module:SetPosition("worldState")
 									end,
@@ -888,7 +889,7 @@ function module:LoadOptions()
 									type = "input",
 									disabled = function() return not db.Minimap.Frames.SetAlwaysUpFrame end,
 									get = function() return db.Minimap.Frames.AlwaysUpFrameX end,
-									set = function(self,AlwaysUpFrameX)
+									set = function(_,AlwaysUpFrameX)
 												if AlwaysUpFrameX == nil or AlwaysUpFrameX == "" then
 													AlwaysUpFrameX = "0"
 												end
@@ -903,7 +904,7 @@ function module:LoadOptions()
 									type = "input",
 									disabled = function() return not db.Minimap.Frames.SetAlwaysUpFrame end,
 									get = function() return db.Minimap.Frames.AlwaysUpFrameY end,
-									set = function(self,AlwaysUpFrameY)
+									set = function(_,AlwaysUpFrameY)
 												if AlwaysUpFrameY == nil or AlwaysUpFrameY == "" then
 													AlwaysUpFrameY = "0"
 												end
@@ -948,7 +949,7 @@ function module:LoadOptions()
 									type = "toggle",
 									width = "full",
 									get = function() return db.Minimap.Frames.SetVehicleSeatIndicator end,
-									set = function(self)
+									set = function(_)
 										db.Minimap.Frames.SetVehicleSeatIndicator = not db.Minimap.Frames.SetVehicleSeatIndicator
 										module:SetPosition("vehicleSeats")
 									end,
@@ -960,7 +961,7 @@ function module:LoadOptions()
 									type = "input",
 									disabled = function() return not db.Minimap.Frames.SetVehicleSeatIndicator end,
 									get = function() return db.Minimap.Frames.VehicleSeatIndicatorX end,
-									set = function(self,VehicleSeatIndicatorX)
+									set = function(_,VehicleSeatIndicatorX)
 												if VehicleSeatIndicatorX == nil or VehicleSeatIndicatorX == "" then
 													VehicleSeatIndicatorX = "0"
 												end
@@ -975,7 +976,7 @@ function module:LoadOptions()
 									type = "input",
 									disabled = function() return not db.Minimap.Frames.SetVehicleSeatIndicator end,
 									get = function() return db.Minimap.Frames.VehicleSeatIndicatorY end,
-									set = function(self,VehicleSeatIndicatorY)
+									set = function(_,VehicleSeatIndicatorY)
 												if VehicleSeatIndicatorY == nil or VehicleSeatIndicatorY == "" then
 													VehicleSeatIndicatorY = "0"
 												end
@@ -991,7 +992,7 @@ function module:LoadOptions()
 							type = "group",
 							disabled = function() return not db.Minimap.Enable end,
 							order = 3,
-							args = {	
+							args = {
 								header1 = {
 									name = "Description",
 									type = "header",
@@ -1020,7 +1021,7 @@ function module:LoadOptions()
 									type = "toggle",
 									width = "full",
 									get = function() return db.Minimap.Frames.SetDurabilityFrame end,
-									set = function(self)
+									set = function(_)
 										db.Minimap.Frames.SetDurabilityFrame = not db.Minimap.Frames.SetDurabilityFrame
 										module:SetPosition("durability")
 									end,
@@ -1032,7 +1033,7 @@ function module:LoadOptions()
 									type = "input",
 									disabled = function() return not db.Minimap.Frames.SetDurabilityFrame end,
 									get = function() return db.Minimap.Frames.DurabilityFrameX end,
-									set = function(self,DurabilityFrameX)
+									set = function(_,DurabilityFrameX)
 												if DurabilityFrameX == nil or DurabilityFrameX == "" then
 													DurabilityFrameX = "0"
 												end
@@ -1047,7 +1048,7 @@ function module:LoadOptions()
 									type = "input",
 									disabled = function() return not db.Minimap.Frames.SetDurabilityFrame end,
 									get = function() return db.Minimap.Frames.DurabilityFrameY end,
-									set = function(self,DurabilityFrameY)
+									set = function(_,DurabilityFrameY)
 												if DurabilityFrameY == nil or DurabilityFrameY == "" then
 													DurabilityFrameY = "0"
 												end
@@ -1092,7 +1093,7 @@ function module:LoadOptions()
 									type = "toggle",
 									width = "full",
 									get = function() return db.Minimap.Frames.SetObjectiveTrackerFrame end,
-									set = function(self)
+									set = function(_)
 										db.Minimap.Frames.SetObjectiveTrackerFrame = not db.Minimap.Frames.SetObjectiveTrackerFrame
 										module:SetPosition("questWatch")
 									end,
@@ -1104,7 +1105,7 @@ function module:LoadOptions()
 									type = "input",
 									disabled = function() return not db.Minimap.Frames.SetObjectiveTrackerFrame end,
 									get = function() return db.Minimap.Frames.ObjectiveTrackerFrameX end,
-									set = function(self,ObjectiveTrackerFrameX)
+									set = function(_,ObjectiveTrackerFrameX)
 												if ObjectiveTrackerFrameX == nil or ObjectiveTrackerFrameX == "" then
 													ObjectiveTrackerFrameX = "0"
 												end
@@ -1119,7 +1120,7 @@ function module:LoadOptions()
 									type = "input",
 									disabled = function() return not db.Minimap.Frames.SetObjectiveTrackerFrame end,
 									get = function() return db.Minimap.Frames.ObjectiveTrackerFrameY end,
-									set = function(self,ObjectiveTrackerFrameY)
+									set = function(_,ObjectiveTrackerFrameY)
 												if ObjectiveTrackerFrameY == nil or ObjectiveTrackerFrameY == "" then
 													ObjectiveTrackerFrameY = "0"
 												end
@@ -1147,7 +1148,7 @@ function module:LoadOptions()
 									type = "description",
 									name = "This Frame occurs when waiting on a ticket response",
 								},
-								spacer = {
+								spacer1 = {
 									name = "",
 									type = "description",
 									width = "full",
@@ -1163,9 +1164,9 @@ function module:LoadOptions()
 									desc = "Enable LUI to set the position of the Ticket. \n\nNote:\n If you are using another addon that you believe to be moving this frame, disabling this may solve a conflict.",
 									type = "toggle",
 									width = "full",
-									
+
 									get = function() return db.Minimap.Frames.SetTicket end,
-									set = function(self)
+									set = function(_)
 										db.Minimap.Frames.SetTicket = not db.Minimap.Frames.SetTicket
 										module:SetPosition("ticketStatus")
 									end,
@@ -1177,7 +1178,7 @@ function module:LoadOptions()
 									type = "input",
 									disabled = function() return not db.Minimap.Frames.SetTicket end,
 									get = function() return db.Minimap.Frames.TicketX end,
-									set = function(self,TicketX)
+									set = function(_,TicketX)
 												if TicketX == nil or TicketX == "" then
 													TicketX = "0"
 												end
@@ -1192,7 +1193,7 @@ function module:LoadOptions()
 									type = "input",
 									disabled = function() return not db.Minimap.Frames.SetTicket end,
 									get = function() return db.Minimap.Frames.TicketY end,
-									set = function(self,TicketY)
+									set = function(_,TicketY)
 												if TicketY == nil or TicketY == "" then
 													TicketY = "0"
 												end
@@ -1201,7 +1202,7 @@ function module:LoadOptions()
 											end,
 									order = 7,
 								},
-								spacer = {
+								spacer2 = {
 									order = 7,
 									width = "full",
 									type = "description",
@@ -1254,9 +1255,9 @@ function module:LoadOptions()
 									desc = "Enable LUI to set the position of the Capture. \n\nNote:\n If you are using another addon that you believe to be moving this frame, disabling this may solve a conflict.",
 									type = "toggle",
 									width = "full",
-									
+
 									get = function() return db.Minimap.Frames.SetCapture end,
-									set = function(self)
+									set = function(_)
 										db.Minimap.Frames.SetCapture = not db.Minimap.Frames.SetCapture
 										module:SetPosition("capture")
 									end,
@@ -1268,7 +1269,7 @@ function module:LoadOptions()
 									type = "input",
 									disabled = function() return not db.Minimap.Frames.SetCapture end,
 									get = function() return db.Minimap.Frames.CaptureX end,
-									set = function(self,CaptureX)
+									set = function(_,CaptureX)
 												if CaptureX == nil or CaptureX == "" then
 													CaptureX = "0"
 												end
@@ -1283,7 +1284,7 @@ function module:LoadOptions()
 									type = "input",
 									disabled = function() return not db.Minimap.Frames.SetCapture end,
 									get = function() return db.Minimap.Frames.CaptureY end,
-									set = function(self,CaptureY)
+									set = function(_,CaptureY)
 												if CaptureY == nil or CaptureY == "" then
 													CaptureY = "0"
 												end
@@ -1294,12 +1295,12 @@ function module:LoadOptions()
 								},
 							},
 						},
-					},	
+					},
 				},
-			},			
+			},
 		},
 	}
-	
+
 	return options
 end
 
@@ -1308,10 +1309,10 @@ function module:OnInitialize()
 	LUI:MergeDefaults(LUI.db.defaults.profile, defaults)
 	LUI:RefreshDefaults()
 	LUI:Refresh()
-	
+
 	self.db = LUI.db.profile
 	db = self.db
-	
+
 	LUI:RegisterModule(self)
 end
 

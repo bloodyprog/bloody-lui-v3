@@ -1,0 +1,9 @@
+{
+    "search.exclude": {
+        "**/.git": true,
+        "**/core": true,
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/libs": true,
+    }
+}
